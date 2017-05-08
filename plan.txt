@@ -1,0 +1,5 @@
+1. make welcome page
+2. add sign-in/ username box
+3. add landing page for after sign-in
+4. show username on landing page
+5. add ability to enter name of list
