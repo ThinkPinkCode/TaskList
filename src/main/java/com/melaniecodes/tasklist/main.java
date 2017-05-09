@@ -4,6 +4,7 @@ import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import static spark.Spark.get;
+import static spark.Spark.post;
 import static spark.Spark.staticFileLocation;
 
 public class main {
@@ -13,6 +14,10 @@ public class main {
 
         get("/", (req, res) -> {
             return new ModelAndView(null, "index.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/chooseName", (req, res) -> {
+            return new ModelAndView(null, "chooseName.hbs");
         }, new HandlebarsTemplateEngine());
     }
 }

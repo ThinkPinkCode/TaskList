@@ -1,0 +1,18 @@
+{{#partial "content"}}
+    First, let's choose a name...
+
+    <!-- box allowing user to choose Task List name -->
+
+    <form method="post" action="">
+        Your TaskList name: <input type="text" name="listName">
+    </form>
+    or
+
+    <!-- button saying to just use today's date -->
+    <form method="post" action="">
+        <button> Just Use Today's Date</button>
+    </form>
+    
+{{/partial}}
+
+{{> base.hbs}}
