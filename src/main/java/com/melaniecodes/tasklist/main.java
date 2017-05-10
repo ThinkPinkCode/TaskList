@@ -1,5 +1,8 @@
 package com.melaniecodes.tasklist;
 
+import com.melaniecodes.tasklist.model.Task;
+import com.melaniecodes.tasklist.model.TaskListDAO;
+import com.melaniecodes.tasklist.model.myTaskListDAO;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -15,6 +18,8 @@ public class main {
 
         staticFileLocation("/public");
 
+        TaskListDAO dao = new myTaskListDAO();
+
         get("/", (req, res) -> {
             return new ModelAndView(null, "index.hbs");
         }, new HandlebarsTemplateEngine());
@@ -23,7 +28,7 @@ public class main {
             return new ModelAndView(null, "chooseName.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("/list", (req, res) -> {
+        post("/create", (req, res) -> {
             Map<String, String> model = new HashMap<>();
             String listName = req.queryParams("listNameInput");
             String userName = req.queryParams("userName");
@@ -33,6 +38,14 @@ public class main {
             res.cookie("userName", userName);
             return new ModelAndView (model, "list.hbs");
         }, new HandlebarsTemplateEngine());
+
+        post("/list", (req, res) -> {
+            String taskName = req.queryParams("taskName");
+            Task myTaskName = new Task(taskName);
+            dao.add(myTaskName);
+            res.redirect("/list");
+            return null;
+        });
 
     }
 }
