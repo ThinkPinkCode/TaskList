@@ -29,7 +29,10 @@ public class main {
             String userName = req.queryParams("userName");
             model.put("listName", listName);
             model.put("userName", userName);
+            res.cookie("listName",  listName);
+            res.cookie("userName", userName);
             return new ModelAndView (model, "list.hbs");
         }, new HandlebarsTemplateEngine());
+        
     }
 }
