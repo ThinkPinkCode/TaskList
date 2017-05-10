@@ -25,7 +25,8 @@ public class main {
 
         post("/list", (req, res) -> {
             Map<String, String> model = new HashMap<>();
-            model.put("listName", "List Name");
+            String listName = req.queryParams("listName");
+            model.put("listName", listName);
             return new ModelAndView (model, "list.hbs");
         }, new HandlebarsTemplateEngine());
     }
