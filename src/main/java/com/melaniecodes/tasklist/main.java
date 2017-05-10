@@ -23,7 +23,7 @@ public class main {
             return new ModelAndView(null, "chooseName.hbs");
         }, new HandlebarsTemplateEngine());
 
-        post("/list", (req, res) -> {
+        get("/list", (req, res) -> {
             Map<String, String> model = new HashMap<>();
             String listName = req.queryParams("listNameInput");
             String userName = req.queryParams("userName");
