@@ -33,6 +33,6 @@ public class main {
             res.cookie("userName", userName);
             return new ModelAndView (model, "list.hbs");
         }, new HandlebarsTemplateEngine());
-        
+
     }
 }
