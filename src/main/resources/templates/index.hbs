@@ -4,8 +4,17 @@
 <br>
 <br>
 
-    <form method="get" action="chooseName">
-    <button>Let's Get Started</button>
+    <form method="post" action="signin">
+        <div class="form-group">
+            <input type="text" class="form-control" id="listNameInput" name="listNameInput" placeholder="TaskList Name">
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" id="userName" name="userName" placeholder="Your Name">
+        </div>
+
+        <button type="submit" class="btn btn-default">Let's Get To Work!</button>
+
     </form>
 
 {{/partial}}

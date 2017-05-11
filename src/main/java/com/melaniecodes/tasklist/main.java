@@ -3,6 +3,7 @@ package com.melaniecodes.tasklist;
 import com.melaniecodes.tasklist.model.Task;
 import com.melaniecodes.tasklist.model.TaskListDAO;
 import com.melaniecodes.tasklist.model.myTaskListDAO;
+import com.sun.tools.internal.xjc.model.Model;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -21,22 +22,35 @@ public class main {
         TaskListDAO dao = new myTaskListDAO();
 
         get("/", (req, res) -> {
+            Map<String, String> model = new HashMap<>();
+            String userName = req.queryParams("userName");
+            model.put("userName", userName);
             return new ModelAndView(null, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("/chooseName", (req, res) -> {
-            return new ModelAndView(null, "chooseName.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        post("/create", (req, res) -> {
+        post ("/signin", (req, res) -> {
             Map<String, String> model = new HashMap<>();
-            String listName = req.queryParams("listNameInput");
             String userName = req.queryParams("userName");
-            model.put("listName", listName);
             model.put("userName", userName);
-            res.cookie("listName",  listName);
             res.cookie("userName", userName);
-            return new ModelAndView (model, "list.hbs");
+            res.redirect("/");
+            return null;
+        });
+
+//        post("/create", (req, res) -> {
+//            Map<String, String> model = new HashMap<>();
+//            String listName = req.queryParams("listNameInput");
+//            model.put("listName", listName);
+//
+//            res.cookie("listName",  listName);
+//
+//            return new ModelAndView (model, "list.hbs");
+//        }, new HandlebarsTemplateEngine());
+
+        get("/list", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("tasks", dao.findAll());
+            return new ModelAndView(model, "list.hbs");
         }, new HandlebarsTemplateEngine());
 
         post("/list", (req, res) -> {
